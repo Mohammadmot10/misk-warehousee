@@ -185,3 +185,34 @@ body{
   .misk-logo{width:95px;margin:0 0 4px auto;}
   .sidebar-section,.side-nav,.side-owner{display:none !important;}
 }
+#mobileDeptBar {
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+  background: #00584b;
+  padding: 14px;
+  color: white;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.mobile-dept-title {
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.mobile-dept-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mobile-dept-buttons button {
+  background: white !important;
+  color: #00584b !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 10px 14px !important;
+  font-weight: 800 !important;
+}
