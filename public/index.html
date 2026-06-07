@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مستودع مسك</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand-card">
+      <img class="misk-logo" src="misk-logo.png" alt="Misk" />
+      <h1>مستودع مسك</h1>
+      <p>نظام إدارة الأصول والمخزون</p>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-label">الأقسام</span>
+      <div id="departments" class="dept-grid sidebar-depts"></div>
+    </div>
+
+    <nav class="side-nav">
+      <a class="active" href="#dashboard">لوحة التحكم</a>
+      <a href="#itemsSection">المخزون</a>
+      <a href="#itemsSection">التصنيفات</a>
+      <a href="#adminSection">لوحة المسؤول</a>
+    </nav>
+
+    <div class="side-owner">
+      <span>تطوير وحقوق</span>
+      <strong>محمد وقيان ال ظافر</strong>
+    </div>
+  </aside>
+
+  <main class="app-shell">
+    <header class="hero topbar" id="dashboard">
+      <div class="hero-text">
+        <span class="role-pill">مستودع مسك</span>
+        <h1 id="siteTitle">مستودع مسك</h1>
+        <p>مرحباً بك في نظام إدارة الأصول والمخزون</p>
+      </div>
+      <div class="hero-actions actions">
+        <button id="refreshBtn">تحديث البيانات</button>
+      </div>
+    </header>
+
+    <section class="summary dashboard-cards">
+      <div class="stat orange"><span id="totalItems">0</span><small>إجمالي الأصناف</small></div>
+      <div class="stat blue"><span id="remainingItems">0</span><small>أصناف متبقية</small></div>
+      <div class="stat purple"><span id="pendingItems">0</span><small>بانتظار موافقة المسؤول</small></div>
+      <div class="stat green"><span id="approvedItems">0</span><small>تمت الموافقة للقسم</small></div>
+      <div class="stat dark"><span id="currentDeptLabel">-</span><small>القسم الحالي</small></div>
+    </section>
+
+    <section class="panel admin-panel" id="adminSection">
+      <div class="admin-head">
+        <div>
+          <h2>لوحة المسؤول</h2>
+          <small id="adminSubtitle" class="hidden">خاصة بالمسؤول: موافقات، داشبورد، وتصدير التقارير.</small>
+        </div>
+      </div>
+
+      <div id="adminLogin" class="admin-login">
+        <div>
+          <strong>دخول المسؤول</strong>
+          <p>أدخل كلمة المرور لعرض الموافقات والتصدير والداش بورد.</p>
+        </div>
+        <input id="adminPass" type="password" placeholder="كلمة مرور المسؤول" />
+        <button id="adminLoginBtn" class="primary">دخول المسؤول</button>
+      </div>
+
+      <div id="adminContent" class="admin-content hidden">
+        <div class="actions admin-buttons">
+          <button id="exportBtn" class="primary">تصدير طلبات Excel مع الصور</button>
+          <button id="damagedExportBtn">تحميل Excel التالف مع الصور</button>
+          <button id="adminLogoutBtn">خروج المسؤول</button>
+          <button id="clearBtn" class="danger">تصفير الطلبات</button>
+        </div>
+
+        <h3>داش بورد الأكثر طلبًا لكل قسم</h3>
+        <div id="adminDashboard" class="dashboard-grid"></div>
+
+        <h3>طلبات بانتظار الموافقة</h3>
+        <div id="adminRequests" class="admin-requests"></div>
+      </div>
+    </section>
+
+    <section class="panel filters-panel" id="itemsSection">
+      <div class="section-title">
+        <h2>الأصناف والمخزون</h2>
+        <p>ابحث أو اختر التصنيف ثم أرسل الطلب للمسؤول. الكمية لا تُخصم إلا بعد الموافقة.</p>
+      </div>
+      <div class="toolbar">
+        <input id="search" placeholder="ابحث باسم الصنف، السيريال، الموديل..." />
+        <select id="statusFilter">
+          <option value="">كل الحالات</option>
+          <option value="سليم">سليم</option>
+        </select>
+        <label class="check"><input type="checkbox" id="hideRequested" /> إخفاء اللي طلبه القسم</label>
+      </div>
+      <div class="category-panel">
+        <h3>التصنيفات</h3>
+        <div id="categories" class="category-grid"></div>
+      </div>
+    </section>
+
+    <section id="items" class="items"></section>
+
+    <footer class="footer-rights">© جميع الحقوق محفوظة - محمد وقيان ال ظافر</footer>
+  </main>
+
+  <template id="itemTemplate">
+    <article class="card">
+      <div class="img-wrap"><img loading="lazy" /></div>
+      <div class="card-body">
+        <h3></h3>
+        <div class="status-badges"></div>
+        <div class="meta"></div>
+        <p class="notes"></p>
+        <div class="request-row">
+          <input class="qty" type="number" min="1" value="1" />
+          <button class="request-btn">إرسال طلب للمسؤول</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
