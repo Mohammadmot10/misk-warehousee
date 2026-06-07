@@ -371,3 +371,29 @@ function exportExcel(){
   a.click();
   URL.revokeObjectURL(a.href);
 }
+function showDepartmentsOnMobile() {
+  const old = document.getElementById('mobileDeptBar');
+  if (old) old.remove();
+
+  const depts = ['خدمات مسانده', 'مسك برامج', 'it'];
+
+  const bar = document.createElement('div');
+  bar.id = 'mobileDeptBar';
+  bar.innerHTML = `
+    <div class="mobile-dept-title">اختر القسم</div>
+    <div class="mobile-dept-buttons">
+      ${depts.map(d => `<button data-dept="${d}">${d}</button>`).join('')}
+    </div>
+  `;
+
+  document.body.prepend(bar);
+
+  bar.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      localStorage.setItem('currentDept', btn.dataset.dept);
+      location.reload();
+    });
+  });
+}
+
+window.addEventListener('DOMContentLoaded', showDepartmentsOnMobile);
