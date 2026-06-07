@@ -1,9 +1,11 @@
+const path = require('path');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const ExcelJS = require('exceljs');
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'store.json');
 const INVENTORY_FILE = path.join(__dirname, 'public', 'inventory.json');
@@ -307,6 +309,9 @@ app.get('/api/export', requireAdmin, async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.listen(PORT, () => {
   console.log(`Warehouse site is running: http://localhost:${PORT}`);
 });
